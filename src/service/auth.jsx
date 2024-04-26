@@ -5,8 +5,9 @@ const AuthService = {
         const response = axios.post('/users',  {user})
         return response
     },
-    async userLogin()  {
-        const response = axios.post('/users/login')
+    async userLogin(user)  {
+        const {data} = axios.post('/users/login', {user})
+        return data
     },
     async getUser()  {
         const response = axios.get('/user')
