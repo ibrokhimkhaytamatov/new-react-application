@@ -1,40 +1,25 @@
-import {Routes, Route} from 'react-router-dom'
+
 import './App.css';
-import {Main,Login,Registr, Navbar} from './components'
-import { useEffect } from 'react';
-import AuthService from './service/auth';
-import { useDispatch } from 'react-redux';
-import { signUserSuccess } from './reduserSlice/auth';
-import { getItem } from './helpers/persistance-storage';
+import {BrowserRouter,Routes,Route} from 'react-router-dom'
+import Home from './pages/home/home';
+import About from './pages/about/about';
+import MainLayout from './pages/layout/mainlayout';
+import Mutaxasislar from './pages/mutaxasislar/page';
+import Singlepage from './pages/singlepage/singlepage';
 
 function App() {
-  const dispatch = useDispatch()
-  const getUser = async () => {
-    try {
-      const responce = await AuthService.getUser()
-      console.log(responce);
-      dispatch(signUserSuccess(responce.user))
-    } catch (error) {
-      
-    }
-  }
-
-  useEffect(() => {
-    const token = getItem('token')
-    if(token){
-      getUser()
-    }
-  },[])
 
   return (
-  <>
-  <Navbar/>
-   <Routes>
-    <Route path='/' element={<Main/>}/>
-    <Route path='/login' element={<Login/>}/>
-    <Route path='/registr' element={<Registr/>}/>
-   </Routes>
-   </>
+    <BrowserRouter>
+    <Routes>
+      <Route element={<MainLayout/>}>
+      <Route path='/' element={<Home/>}/>
+      <Route path='/mutaxasislar' element={<Mutaxasislar/>}/>
+      <Route path='/about' element={<About/>}/>
+      <Route path='/singlepage' element={<Singlepage/>}/>
+      </Route>
+    </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -1,1 +1,0 @@
-export {Input as Inpit} from '../ui'
